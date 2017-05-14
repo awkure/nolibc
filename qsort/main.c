@@ -108,9 +108,9 @@ uintptr puts(char const* str) {
 internal
 void swap_u32(u32* a, u32* b)
 {
-    u32 tmp = *a;
-    *a = *b;
-    *b = tmp;
+    *a ^= *b;
+    *b ^= *a;
+    *a ^= *b;
 }
 
 typedef b32 qsort32_cmp(u32 a, u32 b);
@@ -145,8 +145,8 @@ void qsort32(u32* arr, qsort32_cmp* cmp, uintptr lo, uintptr hi)
 {
     uintptr p;
 
-    if (lo >= hi) {
-        return;
+    if (lo >= hi) { 
+        return; 
     }
 
     p = qsort32_partition(arr, cmp, lo, hi);
